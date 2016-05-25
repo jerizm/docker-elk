@@ -2,15 +2,15 @@ elasticsearch:
   image: elasticsearch:latest
   command: elasticsearch -Des.network.host=0.0.0.0
   ports:
-    - "8081:9200"
-    - "8082:9300"
+    - "9200:9200"
+    - "9300:9300"
 logstash:
   image: logstash:latest
   command: logstash -f /etc/logstash/conf.d/logstash.conf
   volumes:
     - /home/docker-user/docker-elk/logstash/config:/etc/logstash/conf.d
   ports:
-    - "8083:5000"
+    - "5000:5000"
   links:
     - elasticsearch
 kibana:
@@ -18,6 +18,6 @@ kibana:
   volumes:
     - /home/docker-user/docker-elk/kibana/config/:/opt/kibana/config/
   ports:
-    - "8084:5601"
+    - "80:5601"
   links:
     - elasticsearch
