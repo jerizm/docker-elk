@@ -8,8 +8,8 @@ logstash:
   image: logstash:latest
   command: logstash -f /etc/logstash/conf.d/logstash.conf -w 3 -b 1000
   volumes:
-    - /home/docker-user/docker-elk/logstash/config:/etc/logstash/conf.d
-    - /mnt/logs:/logs
+    - ./logstash/config:/etc/logstash/conf.d
+    - ../logs:/logs
   ports:
     - "5000:5000"
   links:
@@ -17,7 +17,7 @@ logstash:
 kibana:
   build: kibana/
   volumes:
-    - /home/docker-user/docker-elk/kibana/config/:/opt/kibana/config/
+    - ./kibana/config/:/opt/kibana/config/
   ports:
     - "80:5601"
   links:
