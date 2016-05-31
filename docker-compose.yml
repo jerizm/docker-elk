@@ -9,7 +9,7 @@ logstash:
   command: logstash -f /etc/logstash/conf.d/logstash.conf -w 3 -b 1000
   volumes:
     - ./logstash/config:/etc/logstash/conf.d
-    - ../logs:/logs
+    - /media/hd2/logs:/logs
   ports:
     - "5000:5000"
   links:
@@ -19,7 +19,7 @@ logstash-elb:
   command: logstash -f /etc/logstash/conf.d/logstash-elb.conf -w 3 -b 1000
   volumes:
     - ./logstash/config:/etc/logstash/conf.d
-    - ../logs-elb:/logs
+    - /media/hd2/logs-elb:/logs
   ports:
     - "5000:5000"
   links:
