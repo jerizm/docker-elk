@@ -20,8 +20,6 @@ logstash-elb:
   volumes:
     - ./logstash/config:/etc/logstash/conf.d
     - /media/hd2/logs-elb:/logs
-  ports:
-    - "5000:5000"
   links:
     - elasticsearch
 kibana:
