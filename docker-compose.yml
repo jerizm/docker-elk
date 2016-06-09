@@ -4,6 +4,7 @@ elasticsearch:
   ports:
     - "8000:9200"
     - "9300:9300"
+
 logstash:
   image: logstash:latest
   command: logstash -f /etc/logstash/conf.d/logstash.conf -w 3 -b 1000
@@ -14,6 +15,7 @@ logstash:
     - "5000:5000"
   links:
     - elasticsearch
+
 logstash-elb:
   image: logstash:latest
   command: logstash -f /etc/logstash/conf.d/logstash-elb.conf -w 3 -b 1000
@@ -22,6 +24,15 @@ logstash-elb:
     - /media/hd2/logs-elb:/logs
   links:
     - elasticsearch
+
+logstash-s3:
+  image: logstash:latest
+  command: logstash -f /etc/logstash/conf.d/logstash-s3.conf -w 3 -b 1000
+  volumes:
+    - ./logstash/config:/etc/logstash/conf.d
+  links:
+    - elasticsearch
+
 kibana:
   build: kibana/
   volumes:
