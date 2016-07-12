@@ -1,6 +1,11 @@
 elasticsearch:
   image: elasticsearch:latest
   command: elasticsearch -Des.network.host=0.0.0.0
+  environment:
+    ES_HEAP_SIZE: 4g
+  volumes:
+    - /media/hd2/elasticsearch/config:/usr/share/elasticsearch/config
+    - /media/hd2/elasticsearch/data:/usr/share/elasticsearch/data
   ports:
     - "8000:9200"
     - "9300:9300"
